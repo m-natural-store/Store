@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0f6b4e">
+<title>M-NATURAL • Online Store & Rate List</title>
+<style>
+  :root {
+    --primary: #0f6b4e;
+    --primary-dark: #084c36;
+    --primary-light: #e6f4ef;
+    --accent: #d97706;
+    --bg: #f6f8fa;
+    --card: #ffffff;
+    --text: #1a202c;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --danger: #dc2626;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    padding-bottom: 100px;
+  }
+  /* Hero Header */
+  .hero {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: #fff;
+    padding: 20px 16px 18px;
+    border-bottom-left-radius: 22px;
+    border-bottom-right-radius: 22px;
+    box-shadow: 0 4px 14px rgba(15, 107, 78, 0.22);
+    user-select: none;
+  }
+  .brand-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brand-badge {
+    background: rgba(255,255,255,0.18);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+  }
+  .hero h1 {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    margin-top: 6px;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .hero p {
+    font-size: 12px;
+    opacity: 0.92;
+    margin-top: 3px;
+  }
+  .trust-strip {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .trust-pill {
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 4px 9px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  /* Admin Banner when unlocked */
+  .admin-banner {
+    display: none;
+    background: #1e293b;
+    color: #fff;
+    padding: 10px 14px;
+    margin: 10px 12px 0;
+    border-radius: 12px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  }
+  .admin-banner.show { display: flex; }
+  .admin-actions { display: flex; gap: 6px; }
+  .btn-sm-admin {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .container {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 12px;
+  }
+
+  /* Search & Categories */
+  .search-wrap {
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    padding: 8px 0;
+    z-index: 40;
+  }
+  .search-input {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: #fff;
+    font-size: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    outline: none;
+  }
+  .search-input:focus { border-color: var(--primary); }
+
+  .cat-bar {
+    display: flex;
+    gap: 7px;
+    overflow-x: auto;
+    padding: 8px 0 4px;
+    scrollbar-width: none;
+  }
+  .cat-bar::-webkit-scrollbar { display: none; }
+  .cat-chip {
+    padding: 7px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .cat-chip.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+
+  /* Product Cards */
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .p-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    position: relative;
+  }
+  .p-card.oos {
+    opacity: 0.68;
+    background: #f8fafc;
+  }
+  .p-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 2px 7px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    align-self: flex-start;
+  }
+  .p-tag.featured {
+    background: #fef3c7;
+    color: #b45309;
+  }
+  .p-tag.out {
+    background: #fee2e2;
+    color: #b91c1c;
+  }
+  .p-name {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .p-desc {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .p-bottom {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+  }
+  .p-price {
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--primary);
+  }
+  .p-price small {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .btn-add-cart {
+    background: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 6px 12px;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .btn-add-cart:active {
+    background: var(--primary);
+    color: #fff;
+  }
+  .btn-oos {
+    background: #f1f5f9;
+    color: #94a3b8;
+    border: 1px solid #cbd5e1;
+    padding: 6px 10px;
+    border-radius: 9px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .btn-edit-card {
+    margin-top: 8px;
+    width: 100%;
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #f59e0b;
+    padding: 5px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  /* Floating Cart Bar */
+  .cart-bar {
+    position: fixed;
+    bottom: 14px;
+    left: 12px;
+    right: 12px;
+    max-width: 536px;
+    margin: 0 auto;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 16px;
+    padding: 13px 16px;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 6px 20px rgba(15, 107, 78, 0.35);
+    z-index: 90;
+    cursor: pointer;
+  }
+  .cart-bar.show { display: flex; }
+  .cart-info span { display: block; }
+  .cart-count { font-size: 11px; opacity: 0.9; font-weight: 600; }
+  .cart-total { font-size: 18px; font-weight: 900; }
+  .cart-cta {
+    background: #fff;
+    color: var(--primary);
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  /* Modals */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.62);
+    z-index: 100;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .modal.open { display: flex; }
+  .sheet {
+    background: #fff;
+    width: 100%;
+    max-width: 560px;
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
+    padding: 20px 16px 28px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.2s ease-out;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0.7; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .sheet-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .opt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin: 12px 0;
+  }
+  .opt-btn {
+    border: 1px solid var(--border);
+    background: #fff;
+    padding: 12px 6px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .opt-btn:active {
+    border-color: var(--primary);
+    background: var(--primary-light);
+  }
+  .opt-btn b { display: block; font-size: 14px; color: var(--text); }
+  .opt-btn span { font-size: 12px; color: var(--primary); font-weight: 800; }
+
+  .cart-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 13px;
+  }
+  .form-group { margin-top: 10px; }
+  .form-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .form-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+  }
+  .form-input:focus { border-color: var(--primary); }
+
+  .btn-wa-order {
+    width: 100%;
+    background: #16a34a;
+    color: #fff;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 800;
+    margin-top: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .btn-wa-order:active { opacity: 0.9; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="brand-top">
+    <span class="brand-badge">DIRECT STORE CATALOG</span>
+    <span style="font-size:11px;font-weight:700;">📞 +91 95203 24368</span>
+  </div>
+  <!-- Secret 5-Tap Trigger on Brand Name -->
+  <h1 id="brandTitle" onclick="handleSecretTap()">M-NATURAL</h1>
+  <p>Mehboob Store • New Seelampur, Shahdara, Delhi</p>
+  <div class="trust-strip">
+    <span class="trust-pill">✓ Premium Dry Fruits</span>
+    <span class="trust-pill">✓ Fresh Daily Kirana</span>
+    <span class="trust-pill">✓ Direct WhatsApp Order</span>
+  </div>
+</div>
+
+<!-- Secret Owner Admin Bar (Hidden from Customers) -->
+<div class="admin-banner" id="adminBanner">
+  <div>
+    <b style="color:#4ade80;">🔓 OWNER ADMIN MODE</b>
+    <div style="font-size:10px;color:#cbd5e1;">Edit prices, stock, or publish live</div>
+  </div>
+  <div class="admin-actions">
+    <button class="btn-sm-admin" style="background:#f59e0b;color:#fff;" onclick="openItemEditor(-1)">+ Item</button>
+    <button class="btn-sm-admin" style="background:#10b981;color:#fff;" onclick="openPublishModal()">Publish Live</button>
+    <button class="btn-sm-admin" style="background:#475569;color:#fff;" onclick="lockAdmin()">Lock</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="search-wrap">
+    <input type="text" id="searchBox" class="search-input" placeholder="Search Kishmish, Badam, Dal, Rice, Oil..." oninput="renderCatalog()">
+    <div class="cat-bar" id="catBar"></div>
+  </div>
+
+  <div class="product-grid" id="productGrid"></div>
+</div>
+
+<!-- Floating Bottom Cart -->
+<div class="cart-bar" id="cartBar" onclick="openCartModal()">
+  <div class="cart-info">
+    <span class="cart-count" id="cartCountText">0 Items Selected</span>
+    <span class="cart-total" id="cartTotalText">₹0</span>
+  </div>
+  <div class="cart-cta">Review & Order →</div>
+</div>
+
+<!-- Weight / Packet Selection Sheet -->
+<div class="modal" id="selectModal" onclick="if(event.target===this)closeModal('selectModal')">
+  <div class="sheet">
+    <div class="sheet-head">
+      <div>
+        <h3 id="mTitle" style="font-size:17px;">Product Name</h3>
+        <p id="mSubtitle" style="font-size:12px;color:var(--primary);font-weight:700;"></p>
+      </div>
+      <button onclick="closeModal('selectModal')" style="border:none;background:#f1f5f9;width:30px;height:30px;border-radius:50%;font-weight:bold;">✕</button>
+    </div>
+    <p style="font-size:12px;color:var(--muted);">Select quantity to add to your order:</p>
+    <div class="opt-grid" id="mOptions"></div>
+  </div>
+</div>
+
+<!-- Checkout / WhatsApp Order Sheet -->
+<div class="modal" id="cartModal" onclick="if(event.target===this)closeModal('cartModal')">
+  <div class="sheet">
+    <div class="sheet-head">
+      <h3 style="font-size:17px;">Your Order Summary</h3>
+      <button onclick="closeModal('cartModal')" style="border:none;background:#f1f5f9;width:30px;height:30px;border-radius:50%;font-weight:bold;">✕</button>
+    </div>
+
+    <div id="cartItemsList"></div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--primary-light);border-radius:12px;margin-top:10px;">
+      <span style="font-weight:800;color:var(--primary);font-size:13px;">ESTIMATED TOTAL</span>
+      <span id="modalTotal" style="font-weight:900;color:var(--primary);font-size:20px;">₹0</span>
+    </div>
+
+    <div class="form-group">
+      <label>YOUR NAME *</label>
+      <input type="text" id="custName" class="form-input" placeholder="Enter your full name">
+    </div>
+    <div class="form-group">
+      <label>DELIVERY / PICKUP ADDRESS *</label>
+      <input type="text" id="custAddr" class="form-input" placeholder="House/Gali No., Area (or 'Store Pickup')">
+    </div>
+    <div class="form-group">
+      <label>PAYMENT PREFERENCE</label>
+      <select id="payPref" class="form-input">
+        <option value="UPI / Online on Delivery">UPI / Online on Delivery</option>
+        <option value="Cash on Delivery / Pickup">Cash on Delivery / Pickup</option>
+      </select>
+    </div>
+
+    <button class="btn-wa-order" onclick="sendOrderToWhatsApp()">
+      <span>📲 Send Order on WhatsApp</span>
+    </button>
+  </div>
+</div>
+
+<!-- Secret Owner PIN Modal -->
+<div class="modal" id="pinModal" onclick="if(event.target===this)closeModal('pinModal')">
+  <div class="sheet">
+    <div class="sheet-head">
+      <h3 style="font-size:16px;">🔒 Owner Security PIN</h3>
+      <button onclick="closeModal('pinModal')" style="border:none;background:#f1f5f9;width:30px;height:30px;border-radius:50%;font-weight:bold;">✕</button>
+    </div>
+    <p style="font-size:12px;color:var(--muted);">Enter your 4-digit Owner PIN (Default: <b>7860</b>)</p>
+    <div class="form-group">
+      <input type="password" inputmode="numeric" maxlength="6" id="pinInput" class="form-input" style="font-size:20px;text-align:center;letter-spacing:6px;" placeholder="••••">
+    </div>
+    <button class="btn-wa-order" style="background:var(--primary);" onclick="verifyPin()">Unlock Owner Controls</button>
+  </div>
+</div>
+
+<!-- Add / Edit Product Modal (Owner Only) -->
+<div class="modal" id="editItemModal" onclick="if(event.target===this)closeModal('editItemModal')">
+  <div class="sheet">
+    <div class="sheet-head">
+      <h3 id="editModalTitle" style="font-size:16px;">Edit Item</h3>
+      <button onclick="closeModal('editItemModal')" style="border:none;background:#f1f5f9;width:30px;height:30px;border-radius:50%;font-weight:bold;">✕</button>
+    </div>
+    <input type="hidden" id="editIdx" value="-1">
+    <div class="form-group">
+      <label>ITEM NAME *</label>
+      <input type="text" id="edName" class="form-input" placeholder="e.g. Badam California">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <div class="form-group">
+        <label>CATEGORY</label>
+        <input type="text" id="edCat" class="form-input" placeholder="Dry Fruits">
+      </div>
+      <div class="form-group">
+        <label>SELLING UNIT</label>
+        <select id="edUnit" class="form-input">
+          <option value="kg">Per KG (Loose)</option>
+          <option value="pkt">Per Pack (Fixed)</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <div class="form-group">
+        <label>SELLING RATE (₹) *</label>
+        <input type="number" id="edRate" class="form-input" placeholder="780">
+      </div>
+      <div class="form-group">
+        <label>STOCK STATUS</label>
+        <select id="edStock" class="form-input">
+          <option value="in">In Stock (Available)</option>
+          <option value="out">Out of Stock (Hidden/Disabled)</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>SHORT DESCRIPTION</label>
+      <input type="text" id="edDesc" class="form-input" placeholder="Sweet & crunchy">
+    </div>
+    <div class="form-group">
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+        <input type="checkbox" id="edFeatured"> Highlight with ★ M-NATURAL Badge
+      </label>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:14px;">
+      <button id="btnDeleteItem" onclick="deleteCurrentItem()" style="flex:1;background:#fee2e2;color:#dc2626;border:none;padding:12px;border-radius:10px;font-weight:800;display:none;">Delete</button>
+      <button onclick="saveItemChanges()" style="flex:2;background:var(--primary);color:#fff;border:none;padding:12px;border-radius:10px;font-weight:800;">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- One-Tap Publish Live Modal (Owner Only) -->
+<div class="modal" id="publishModal" onclick="if(event.target===this)closeModal('publishModal')">
+  <div class="sheet">
+    <div class="sheet-head">
+      <h3 style="font-size:16px;">🚀 Publish Updates to All Customers</h3>
+      <button onclick="closeModal('publishModal')" style="border:none;background:#f1f5f9;width:30px;height:30px;border-radius:50%;font-weight:bold;">✕</button>
+    </div>
+    <p style="font-size:12px;color:var(--muted);line-height:1.4;">
+      Save your one-time GitHub Token below. After that, whenever you change rates or items, just press <b>Publish Now</b>—all customers will see new rates in 30 seconds!
+    </p>
+    <div class="form-group">
+      <label>GITHUB PERSONAL ACCESS TOKEN (Saved securely on your phone only)</label>
+      <input type="password" id="ghTokenInput" class="form-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+    </div>
+    <div class="form-group">
+      <label>CHANGE OWNER PIN (Optional)</label>
+      <input type="text" inputmode="numeric" maxlength="6" id="newPinInput" class="form-input" placeholder="Leave blank to keep current PIN">
+    </div>
+    <button id="btnPublishNow" class="btn-wa-order" style="background:#0f6b4e;" onclick="publishCatalogToGitHub()">
+      ⚡ Publish Live Now
+    </button>
+    <p id="publishStatus" style="font-size:12px;text-align:center;margin-top:10px;font-weight:700;"></p>
+  </div>
+</div>
+
+<script id="catalogDataScript">
+  // Store Configuration
+  const STORE_WHATSAPP = "919520324368";
+  const GH_OWNER = "m-natural-store";
+  const GH_REPO = "Store";
+  const GH_FILE = "index.html";
+  let OWNER_PIN = "7860";
+
+  let CATALOG = [
+    // M-Natural Branded Packs
+    { name: "M-Natural Premium Raisins (200g)", cat: "M-Natural Packs", unit: "pkt", rate: 115, desc: "Hygienically packed • Sweet & fresh", featured: true, oos: false },
+    { name: "M-Natural Premium Raisins (250g)", cat: "M-Natural Packs", unit: "pkt", rate: 140, desc: "Family value pack • Hand-selected", featured: true, oos: false },
+    { name: "M-Natural California Badam (250g)", cat: "M-Natural Packs", unit: "pkt", rate: 205, desc: "Crunchy whole almonds pack", featured: true, oos: false },
+    { name: "M-Natural Whole Kaju W320 (250g)", cat: "M-Natural Packs", unit: "pkt", rate: 225, desc: "Premium white whole cashews", featured: true, oos: false },
+
+    // Dry Fruits (Loose)
+    { name: "Kishmish (Green Raisins)", cat: "Dry Fruits", unit: "kg", rate: 540, desc: "Loose weight • Best quality", featured: false, oos: false },
+    { name: "Badam California", cat: "Dry Fruits", unit: "kg", rate: 780, desc: "Sweet & crunchy", featured: false, oos: false },
+    { name: "Badam Gurbandi", cat: "Dry Fruits", unit: "kg", rate: 840, desc: "Rich natural oil content", featured: false, oos: false },
+    { name: "Kaju W320 (Cashew)", cat: "Dry Fruits", unit: "kg", rate: 860, desc: "Bold whole cashew", featured: false, oos: false },
+    { name: "Akhrot Giri (Walnut)", cat: "Dry Fruits", unit: "kg", rate: 1100, desc: "Snow-white Kashmiri kernels", featured: false, oos: false },
+    { name: "Pista Salted", cat: "Dry Fruits", unit: "kg", rate: 980, desc: "Roasted & lightly salted", featured: false, oos: false },
+    { name: "Anjeer (Dried Figs)", cat: "Dry Fruits", unit: "kg", rate: 1200, desc: "Soft jumbo figs", featured: false, oos: false },
+    { name: "Makhana (Fox Nuts)", cat: "Dry Fruits", unit: "kg", rate: 950, desc: "Crunchy roasted grade", featured: false, oos: false },
+    { name: "Khajoor (Dates)", cat: "Dry Fruits", unit: "kg", rate: 320, desc: "Soft & sweet dates", featured: false, oos: false },
+
+    // Dal & Pulses
+    { name: "Arhar / Toor Dal", cat: "Dal & Pulses", unit: "kg", rate: 165, desc: "Unpolished daily dal", featured: false, oos: false },
+    { name: "Chana Dal", cat: "Dal & Pulses", unit: "kg", rate: 95, desc: "Fresh split chickpeas", featured: false, oos: false },
+    { name: "Moong Dal Dhuli", cat: "Dal & Pulses", unit: "kg", rate: 125, desc: "Easy to digest yellow moong", featured: false, oos: false },
+    { name: "Masoor Dal Lal", cat: "Dal & Pulses", unit: "kg", rate: 105, desc: "Clean red lentils", featured: false, oos: false },
+    { name: "Kabuli Chana (White)", cat: "Dal & Pulses", unit: "kg", rate: 145, desc: "Bold size chole", featured: false, oos: false },
+    { name: "Rajma Chitra", cat: "Dal & Pulses", unit: "kg", rate: 150, desc: "Quick-cooking soft rajma", featured: false, oos: false },
+
+    // Atta & Rice
+    { name: "Chakki Fresh Atta", cat: "Atta & Rice", unit: "kg", rate: 38, desc: "100% whole wheat flour", featured: false, oos: false },
+    { name: "Basmati Rice (1121)", cat: "Atta & Rice", unit: "kg", rate: 120, desc: "Extra-long aromatic grain", featured: false, oos: false },
+    { name: "Golden Sella Rice", cat: "Atta & Rice", unit: "kg", rate: 90, desc: "Ideal for biryani & pulao", featured: false, oos: false },
+    { name: "Besan (Gram Flour)", cat: "Atta & Rice", unit: "kg", rate: 105, desc: "Fine chana dal besan", featured: false, oos: false },
+
+    // Oils, Spices & Daily Kirana
+    { name: "Mustard Oil (Sarson 1L)", cat: "Oils & Kirana", unit: "pkt", rate: 155, desc: "Pure kachi ghani 1L bottle", featured: false, oos: false },
+    { name: "Refined Soyabean Oil (1L)", cat: "Oils & Kirana", unit: "pkt", rate: 135, desc: "1L pouch / bottle", featured: false, oos: false },
+    { name: "Desi Ghee (1L Pack)", cat: "Oils & Kirana", unit: "pkt", rate: 620, desc: "Pure aromatic ghee", featured: false, oos: false },
+    { name: "Cheeni (Sugar)", cat: "Oils & Kirana", unit: "kg", rate: 46, desc: "Clean white crystal sugar", featured: false, oos: false },
+    { name: "Chai Patti (Tea Leaves)", cat: "Oils & Kirana", unit: "kg", rate: 360, desc: "Strong Assam blend", featured: false, oos: false },
+    { name: "Haldi Powder (Turmeric)", cat: "Oils & Kirana", unit: "kg", rate: 260, desc: "Pure ground haldi", featured: false, oos: false },
+    { name: "Jeera (Cumin Seeds)", cat: "Oils & Kirana", unit: "kg", rate: 380, desc: "Aromatic whole jeera", featured: false, oos: false }
+  ];
+</script>
+
+<script>
+  let activeCat = "All";
+  let selectedProd = null;
+  let cart = [];
+  let isAdmin = false;
+  let tapCount = 0;
+  let tapTimer = null;
+
+  // Secret 5-tap unlock on M-NATURAL logo
+  function handleSecretTap() {
+    if (isAdmin) return;
+    tapCount++;
+    clearTimeout(tapTimer);
+    tapTimer = setTimeout(() => { tapCount = 0; }, 1800);
+    if (tapCount >= 5) {
+      tapCount = 0;
+      document.getElementById('pinInput').value = '';
+      document.getElementById('pinModal').classList.add('open');
+      setTimeout(() => document.getElementById('pinInput').focus(), 150);
+    }
+  }
+
+  function verifyPin() {
+    const val = document.getElementById('pinInput').value.trim();
+    if (val === OWNER_PIN) {
+      isAdmin = true;
+      closeModal('pinModal');
+      document.getElementById('adminBanner').classList.add('show');
+      renderCatalog();
+    } else {
+      alert("Incorrect Owner PIN");
+    }
+  }
+
+  function lockAdmin() {
+    isAdmin = false;
+    document.getElementById('adminBanner').classList.remove('show');
+    renderCatalog();
+  }
+
+  function renderCats() {
+    const cats = ["All", ...new Set(CATALOG.map(p => p.cat))];
+    document.getElementById('catBar').innerHTML = cats.map(c =>
+      `<button class="cat-chip ${c===activeCat?'active':''}" onclick="activeCat='${c}';renderCats();renderCatalog();">${c}</button>`
+    ).join('');
+  }
+
+  function renderCatalog() {
+    const q = document.getElementById('searchBox').value.toLowerCase();
+    const list = CATALOG.filter(p =>
+      (activeCat === "All" || p.cat === activeCat) &&
+      (p.name.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q))
+    );
+
+    document.getElementById('productGrid').innerHTML = list.map(p => {
+      const idx = CATALOG.indexOf(p);
+      const unitTxt = p.unit === 'pkt' ? 'pack' : 'kg';
+      const isOos = !!p.oos;
+      let badgeHtml = `<span class="p-tag ${p.featured ? 'featured' : ''}">${p.featured ? '★ M-NATURAL' : p.cat}</span>`;
+      if (isOos) badgeHtml = `<span class="p-tag out">OUT OF STOCK</span>`;
+
+      return `
+      <div class="p-card ${isOos ? 'oos' : ''}">
+        <div>
+          ${badgeHtml}
+          <div class="p-name">${p.name}</div>
+          <div class="p-desc">${p.desc}</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹${p.rate} <small>/ ${unitTxt}</small></div>
+            ${isOos
+              ? `<span class="btn-oos">Unavailable</span>`
+              : `<button class="btn-add-cart" onclick="openSelectModal(${idx})">+ Add</button>`}
+          </div>
+          ${isAdmin ? `<button class="btn-edit-card" onclick="openItemEditor(${idx})">✎ Edit Rate / Stock</button>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // Admin Item Editor
+  function openItemEditor(idx) {
+    document.getElementById('editIdx').value = idx;
+    if (idx === -1) {
+      document.getElementById('editModalTitle').innerText = "+ Add New Product";
+      document.getElementById('edName').value = "";
+      document.getElementById('edCat').value = "Dry Fruits";
+      document.getElementById('edUnit').value = "kg";
+      document.getElementById('edRate').value = "";
+      document.getElementById('edStock').value = "in";
+      document.getElementById('edDesc').value = "";
+      document.getElementById('edFeatured').checked = false;
+      document.getElementById('btnDeleteItem').style.display = "none";
+    } else {
+      const p = CATALOG[idx];
+      document.getElementById('editModalTitle').innerText = "Edit Product";
+      document.getElementById('edName').value = p.name;
+      document.getElementById('edCat').value = p.cat;
+      document.getElementById('edUnit').value = p.unit;
+      document.getElementById('edRate').value = p.rate;
+      document.getElementById('edStock').value = p.oos ? "out" : "in";
+      document.getElementById('edDesc').value = p.desc;
+      document.getElementById('edFeatured').checked = !!p.featured;
+      document.getElementById('btnDeleteItem').style.display = "block";
+    }
+    document.getElementById('editItemModal').classList.add('open');
+  }
+
+  function saveItemChanges() {
+    const idx = parseInt(document.getElementById('editIdx').value);
+    const name = document.getElementById('edName').value.trim();
+    const cat = document.getElementById('edCat').value.trim() || "General";
+    const unit = document.getElementById('edUnit').value;
+    const rate = parseFloat(document.getElementById('edRate').value);
+    const oos = document.getElementById('edStock').value === "out";
+    const desc = document.getElementById('edDesc').value.trim();
+    const featured = document.getElementById('edFeatured').checked;
+
+    if (!name || isNaN(rate) || rate <= 0) {
+      return alert("Please enter valid item name and rate.");
+    }
+
+    const itemObj = { name, cat, unit, rate, desc, featured, oos };
+    if (idx === -1) {
+      CATALOG.unshift(itemObj);
+    } else {
+      CATALOG[idx] = itemObj;
+    }
+    closeModal('editItemModal');
+    renderCats();
+    renderCatalog();
+  }
+
+  function deleteCurrentItem() {
+    const idx = parseInt(document.getElementById('editIdx').value);
+    if (idx >= 0 && confirm("Remove this item from catalog?")) {
+      CATALOG.splice(idx, 1);
+      closeModal('editItemModal');
+      renderCats();
+      renderCatalog();
+    }
+  }
+
+  // Publish directly to GitHub Pages
+  function openPublishModal() {
+    document.getElementById('ghTokenInput').value = localStorage.getItem('mnatural_gh_token') || '';
+    document.getElementById('newPinInput').value = '';
+    document.getElementById('publishStatus').innerText = '';
+    document.getElementById('publishModal').classList.add('open');
+  }
+
+  async function publishCatalogToGitHub() {
+    const token = document.getElementById('ghTokenInput').value.trim();
+    const newPin = document.getElementById('newPinInput').value.trim();
+    const statusEl = document.getElementById('publishStatus');
+
+    if (!token) {
+      return alert("Please paste your GitHub Personal Access Token once.");
+    }
+    localStorage.setItem('mnatural_gh_token', token);
+    if (newPin && newPin.length >= 4) {
+      OWNER_PIN = newPin;
+    }
+
+    statusEl.style.color = "#0f6b4e";
+    statusEl.innerText = "⏳ Publishing new rates to live website...";
+
+    try {
+      // Build updated HTML source
+      const docClone = document.documentElement.cloneNode(true);
+      // Reset UI states in exported HTML so customers see clean view
+      docClone.querySelector('#adminBanner').classList.remove('show');
+      docClone.querySelector('#cartBar').classList.remove('show');
+      docClone.querySelectorAll('.modal').forEach(m => m.classList.remove('open'));
+      docClone.querySelector('#searchBox').setAttribute('value', '');
+
+      const dataScript = docClone.querySelector('#catalogDataScript');
+      dataScript.textContent = `
+  const STORE_WHATSAPP = "${STORE_WHATSAPP}";
+  const GH_OWNER = "${GH_OWNER}";
+  const GH_REPO = "${GH_REPO}";
+  const GH_FILE = "${GH_FILE}";
+  let OWNER_PIN = "${OWNER_PIN}";
+
+  let CATALOG = ${JSON.stringify(CATALOG, null, 2)};
+`;
+      const finalHtml = "<!DOCTYPE html>\n" + docClone.outerHTML;
+
+      // Get current file SHA from GitHub
+      const apiUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+      const getRes = await fetch(apiUrl, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Accept": "application/vnd.github+json"
+        }
+      });
+      if (!getRes.ok) throw new Error("Could not connect to GitHub. Check token permissions.");
+      const fileData = await getRes.json();
+
+      // Encode UTF-8 string safely to Base64
+      const utf8Bytes = new TextEncoder().encode(finalHtml);
+      let binary = "";
+      utf8Bytes.forEach(b => binary += String.fromCharCode(b));
+      const base64Content = btoa(binary);
+
+      // Commit updated index.html
+      const putRes = await fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Accept": "application/vnd.github+json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: "Update M-NATURAL catalog rates & stock",
+          content: base64Content,
+          sha: fileData.sha
+        })
+      });
+
+      if (!putRes.ok) throw new Error("Failed to publish update to GitHub.");
+
+      statusEl.style.color = "#16a34a";
+      statusEl.innerText = "✅ Published! Live for all customers in 30 seconds.";
+    } catch (err) {
+      statusEl.style.color = "#dc2626";
+      statusEl.innerText = "❌ Error: " + err.message;
+    }
+  }
+
+  // Customer Order Functions
+  function openSelectModal(idx) {
+    selectedProd = CATALOG[idx];
+    if (selectedProd.oos) return;
+    const isPkt = selectedProd.unit === 'pkt';
+    document.getElementById('mTitle').innerText = selectedProd.name;
+    document.getElementById('mSubtitle').innerText = `₹${selectedProd.rate} per ${isPkt ? 'pack' : 'kg'}`;
+
+    const options = isPkt
+      ? [
+          { q: 1, label: "1 Pack" },
+          { q: 2, label: "2 Packs" },
+          { q: 3, label: "3 Packs" },
+          { q: 4, label: "4 Packs" },
+          { q: 5, label: "5 Packs" },
+          { q: 10, label: "10 Packs" }
+        ]
+      : [
+          { q: 0.1, label: "100g" },
+          { q: 0.25, label: "250g" },
+          { q: 0.5, label: "500g" },
+          { q: 1, label: "1 kg" },
+          { q: 2, label: "2 kg" },
+          { q: 5, label: "5 kg" }
+        ];
+
+    document.getElementById('mOptions').innerHTML = options.map(o => {
+      const price = Math.round(selectedProd.rate * o.q);
+      return `
+      <button class="opt-btn" onclick="addToCart('${o.label}', ${price})">
+        <b>${o.label}</b>
+        <span>₹${price}</span>
+      </button>`;
+    }).join('');
+
+    document.getElementById('selectModal').classList.add('open');
+  }
+
+  function addToCart(label, price) {
+    cart.push({ name: `${selectedProd.name} (${label})`, price });
+    closeModal('selectModal');
+    updateCartBar();
+  }
+
+  function updateCartBar() {
+    const bar = document.getElementById('cartBar');
+    if (!cart.length) {
+      bar.classList.remove('show');
+      return;
+    }
+    const total = cart.reduce((s, c) => s + c.price, 0);
+    document.getElementById('cartCountText').innerText = `${cart.length} Item${cart.length>1?'s':''} Selected`;
+    document.getElementById('cartTotalText').innerText = `₹${total}`;
+    bar.classList.add('show');
+  }
+
+  function openCartModal() {
+    renderCartItems();
+    document.getElementById('cartModal').classList.add('open');
+  }
+
+  function renderCartItems() {
+    const total = cart.reduce((s, c) => s + c.price, 0);
+    document.getElementById('modalTotal').innerText = `₹${total}`;
+    document.getElementById('cartItemsList').innerHTML = cart.length
+      ? cart.map((c, i) => `
+        <div class="cart-item-row">
+          <span>${c.name}</span>
+          <span><b>₹${c.price}</b> <button onclick="cart.splice(${i},1);renderCartItems();updateCartBar();" style="border:none;background:none;color:#dc2626;font-weight:bold;margin-left:8px;font-size:15px;">✕</button></span>
+        </div>`).join('')
+      : `<p style="text-align:center;color:var(--muted);padding:12px 0;">Your cart is empty.</p>`;
+  }
+
+  function sendOrderToWhatsApp() {
+    if (!cart.length) return alert("Please add at least one item.");
+    const name = document.getElementById('custName').value.trim();
+    const addr = document.getElementById('custAddr').value.trim();
+    const pay = document.getElementById('payPref').value;
+    if (!name || !addr) return alert("Please enter your Name and Address.");
+
+    const total = cart.reduce((s, c) => s + c.price, 0);
+    const itemsText = cart.map((c, idx) => `${idx+1}. ${c.name} - ₹${c.price}`).join('%0A');
+
+    const msg = `*NEW ORDER • M-NATURAL*%0A` +
+                `Customer: *${encodeURIComponent(name)}*%0A` +
+                `Address: ${encodeURIComponent(addr)}%0A` +
+                `Payment: ${encodeURIComponent(pay)}%0A%0A` +
+                `*Order Items:*%0A${itemsText}%0A%0A` +
+                `*Total Amount: ₹${total}*`;
+
+    window.open(`https://wa.me/${STORE_WHATSAPP}?text=${msg}`, '_blank');
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+  }
+
+  renderCats();
+  renderCatalog();
+</script>
+</body>
+</html>
