@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#0f6b4e">
-<title>M-NATURAL • Online Store & Rate List</title>
+<title>M-NATURAL • Online Store &amp; Rate List</title>
 <style>
   :root {
     --primary: #0f6b4e;
@@ -399,7 +398,7 @@
 <div class="hero">
   <div class="brand-top">
     <span class="brand-badge">DIRECT STORE CATALOG</span>
-    <span style="font-size:11px;font-weight:700;">📞 +91 95203 24368</span>
+    <span style="font-size:11px;font-weight:700;">📞 <a href="tel:+91 95203 24368">+91 95203 24368</a></span>
   </div>
   <!-- Secret 5-Tap Trigger on Brand Name -->
   <h1 id="brandTitle" onclick="handleSecretTap()">M-NATURAL</h1>
@@ -426,11 +425,431 @@
 
 <div class="container">
   <div class="search-wrap">
-    <input type="text" id="searchBox" class="search-input" placeholder="Search Kishmish, Badam, Dal, Rice, Oil..." oninput="renderCatalog()">
-    <div class="cat-bar" id="catBar"></div>
+    <input type="text" id="searchBox" class="search-input" placeholder="Search Kishmish, Badam, Dal, Rice, Oil..." oninput="renderCatalog()" value="">
+    <div class="cat-bar" id="catBar"><button class="cat-chip active" onclick="activeCat='All';renderCats();renderCatalog();">All</button><button class="cat-chip " onclick="activeCat='M-Natural Packs';renderCats();renderCatalog();">M-Natural Packs</button><button class="cat-chip " onclick="activeCat='Dry Fruits';renderCats();renderCatalog();">Dry Fruits</button><button class="cat-chip " onclick="activeCat='Dal &amp; Pulses';renderCats();renderCatalog();">Dal &amp; Pulses</button><button class="cat-chip " onclick="activeCat='Atta &amp; Rice';renderCats();renderCatalog();">Atta &amp; Rice</button><button class="cat-chip " onclick="activeCat='Oils &amp; Kirana';renderCats();renderCatalog();">Oils &amp; Kirana</button></div>
   </div>
 
-  <div class="product-grid" id="productGrid"></div>
+  <div class="product-grid" id="productGrid">
+      <div class="p-card ">
+        <div>
+          <span class="p-tag featured">★ M-NATURAL</span>
+          <div class="p-name">M-Natural Premium Raisins (200g)</div>
+          <div class="p-desc">Hygienically packed • Sweet &amp; fresh</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹115 <small>/ pack</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(0)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(0)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag featured">★ M-NATURAL</span>
+          <div class="p-name">M-Natural Premium Raisins (250g)</div>
+          <div class="p-desc">Family value pack • Hand-selected</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹140 <small>/ pack</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(1)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(1)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag featured">★ M-NATURAL</span>
+          <div class="p-name">M-Natural California Badam (250g)</div>
+          <div class="p-desc">Crunchy whole almonds pack</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹205 <small>/ pack</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(2)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(2)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag featured">★ M-NATURAL</span>
+          <div class="p-name">M-Natural Whole Kaju W320 (250g)</div>
+          <div class="p-desc">Premium white whole cashews</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹225 <small>/ pack</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(3)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(3)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Dry Fruits</span>
+          <div class="p-name">Kishmish (Green Raisins)</div>
+          <div class="p-desc">Loose weight • Best quality</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹540 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(4)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(4)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Dry Fruits</span>
+          <div class="p-name">Badam California</div>
+          <div class="p-desc">Sweet &amp; crunchy</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹780 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(5)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(5)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Dry Fruits</span>
+          <div class="p-name">Badam Gurbandi</div>
+          <div class="p-desc">Rich natural oil content</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹840 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(6)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(6)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Dry Fruits</span>
+          <div class="p-name">Kaju W320 (Cashew)</div>
+          <div class="p-desc">Bold whole cashew</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹860 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(7)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(7)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Dry Fruits</span>
+          <div class="p-name">Akhrot Giri (Walnut)</div>
+          <div class="p-desc">Snow-white Kashmiri kernels</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹1100 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(8)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(8)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Dry Fruits</span>
+          <div class="p-name">Pista Salted</div>
+          <div class="p-desc">Roasted &amp; lightly salted</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹980 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(9)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(9)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Dry Fruits</span>
+          <div class="p-name">Anjeer (Dried Figs)</div>
+          <div class="p-desc">Soft jumbo figs</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹1200 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(10)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(10)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Dry Fruits</span>
+          <div class="p-name">Makhana (Fox Nuts)</div>
+          <div class="p-desc">Crunchy roasted grade</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹950 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(11)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(11)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Dry Fruits</span>
+          <div class="p-name">Khajoor (Dates)</div>
+          <div class="p-desc">Soft &amp; sweet dates</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹320 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(12)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(12)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Dal &amp; Pulses</span>
+          <div class="p-name">Arhar / Toor Dal</div>
+          <div class="p-desc">Unpolished daily dal</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹165 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(13)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(13)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Dal &amp; Pulses</span>
+          <div class="p-name">Chana Dal</div>
+          <div class="p-desc">Fresh split chickpeas</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹95 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(14)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(14)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Dal &amp; Pulses</span>
+          <div class="p-name">Moong Dal Dhuli</div>
+          <div class="p-desc">Easy to digest yellow moong</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹125 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(15)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(15)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Dal &amp; Pulses</span>
+          <div class="p-name">Masoor Dal Lal</div>
+          <div class="p-desc">Clean red lentils</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹105 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(16)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(16)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Dal &amp; Pulses</span>
+          <div class="p-name">Kabuli Chana (White)</div>
+          <div class="p-desc">Bold size chole</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹145 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(17)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(17)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Dal &amp; Pulses</span>
+          <div class="p-name">Rajma Chitra</div>
+          <div class="p-desc">Quick-cooking soft rajma</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹150 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(18)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(18)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Atta &amp; Rice</span>
+          <div class="p-name">Chakki Fresh Atta</div>
+          <div class="p-desc">100% whole wheat flour</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹38 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(19)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(19)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Atta &amp; Rice</span>
+          <div class="p-name">Basmati Rice (1121)</div>
+          <div class="p-desc">Extra-long aromatic grain</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹120 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(20)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(20)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Atta &amp; Rice</span>
+          <div class="p-name">Golden Sella Rice</div>
+          <div class="p-desc">Ideal for biryani &amp; pulao</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹90 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(21)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(21)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Atta &amp; Rice</span>
+          <div class="p-name">Besan (Gram Flour)</div>
+          <div class="p-desc">Fine chana dal besan</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹105 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(22)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(22)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Oils &amp; Kirana</span>
+          <div class="p-name">Mustard Oil (Sarson 1L)</div>
+          <div class="p-desc">Pure kachi ghani 1L bottle</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹155 <small>/ pack</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(23)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(23)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Oils &amp; Kirana</span>
+          <div class="p-name">Refined Soyabean Oil (1L)</div>
+          <div class="p-desc">1L pouch / bottle</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹135 <small>/ pack</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(24)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(24)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Oils &amp; Kirana</span>
+          <div class="p-name">Desi Ghee (1L Pack)</div>
+          <div class="p-desc">Pure aromatic ghee</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹620 <small>/ pack</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(25)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(25)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Oils &amp; Kirana</span>
+          <div class="p-name">Cheeni (Sugar)</div>
+          <div class="p-desc">Clean white crystal sugar</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹46 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(26)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(26)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Oils &amp; Kirana</span>
+          <div class="p-name">Chai Patti (Tea Leaves)</div>
+          <div class="p-desc">Strong Assam blend</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹360 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(27)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(27)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Oils &amp; Kirana</span>
+          <div class="p-name">Haldi Powder (Turmeric)</div>
+          <div class="p-desc">Pure ground haldi</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹260 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(28)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(28)">✎ Edit Rate / Stock</button>
+        </div>
+      </div>
+      <div class="p-card ">
+        <div>
+          <span class="p-tag ">Oils &amp; Kirana</span>
+          <div class="p-name">Jeera (Cumin Seeds)</div>
+          <div class="p-desc">Aromatic whole jeera</div>
+        </div>
+        <div>
+          <div class="p-bottom">
+            <div class="p-price">₹380 <small>/ kg</small></div>
+            <button class="btn-add-cart" onclick="openSelectModal(29)">+ Add</button>
+          </div>
+          <button class="btn-edit-card" onclick="openItemEditor(29)">✎ Edit Rate / Stock</button>
+        </div>
+      </div></div>
 </div>
 
 <!-- Floating Bottom Cart -->
@@ -439,7 +858,7 @@
     <span class="cart-count" id="cartCountText">0 Items Selected</span>
     <span class="cart-total" id="cartTotalText">₹0</span>
   </div>
-  <div class="cart-cta">Review & Order →</div>
+  <div class="cart-cta">Review &amp; Order →</div>
 </div>
 
 <!-- Weight / Packet Selection Sheet -->
@@ -549,7 +968,7 @@
     </div>
     <div class="form-group">
       <label>SHORT DESCRIPTION</label>
-      <input type="text" id="edDesc" class="form-input" placeholder="Sweet & crunchy">
+      <input type="text" id="edDesc" class="form-input" placeholder="Sweet &amp; crunchy">
     </div>
     <div class="form-group">
       <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
@@ -584,12 +1003,11 @@
     <button id="btnPublishNow" class="btn-wa-order" style="background:#0f6b4e;" onclick="publishCatalogToGitHub()">
       ⚡ Publish Live Now
     </button>
-    <p id="publishStatus" style="font-size:12px;text-align:center;margin-top:10px;font-weight:700;"></p>
+    <p id="publishStatus" style="font-size: 12px; text-align: center; margin-top: 10px; font-weight: 700; color: rgb(15, 107, 78);">⏳ Publishing new rates to live website...</p>
   </div>
 </div>
 
 <script id="catalogDataScript">
-  // Store Configuration
   const STORE_WHATSAPP = "919520324368";
   const GH_OWNER = "m-natural-store";
   const GH_REPO = "Store";
@@ -597,46 +1015,277 @@
   let OWNER_PIN = "7860";
 
   let CATALOG = [
-    // M-Natural Branded Packs
-    { name: "M-Natural Premium Raisins (200g)", cat: "M-Natural Packs", unit: "pkt", rate: 115, desc: "Hygienically packed • Sweet & fresh", featured: true, oos: false },
-    { name: "M-Natural Premium Raisins (250g)", cat: "M-Natural Packs", unit: "pkt", rate: 140, desc: "Family value pack • Hand-selected", featured: true, oos: false },
-    { name: "M-Natural California Badam (250g)", cat: "M-Natural Packs", unit: "pkt", rate: 205, desc: "Crunchy whole almonds pack", featured: true, oos: false },
-    { name: "M-Natural Whole Kaju W320 (250g)", cat: "M-Natural Packs", unit: "pkt", rate: 225, desc: "Premium white whole cashews", featured: true, oos: false },
-
-    // Dry Fruits (Loose)
-    { name: "Kishmish (Green Raisins)", cat: "Dry Fruits", unit: "kg", rate: 540, desc: "Loose weight • Best quality", featured: false, oos: false },
-    { name: "Badam California", cat: "Dry Fruits", unit: "kg", rate: 780, desc: "Sweet & crunchy", featured: false, oos: false },
-    { name: "Badam Gurbandi", cat: "Dry Fruits", unit: "kg", rate: 840, desc: "Rich natural oil content", featured: false, oos: false },
-    { name: "Kaju W320 (Cashew)", cat: "Dry Fruits", unit: "kg", rate: 860, desc: "Bold whole cashew", featured: false, oos: false },
-    { name: "Akhrot Giri (Walnut)", cat: "Dry Fruits", unit: "kg", rate: 1100, desc: "Snow-white Kashmiri kernels", featured: false, oos: false },
-    { name: "Pista Salted", cat: "Dry Fruits", unit: "kg", rate: 980, desc: "Roasted & lightly salted", featured: false, oos: false },
-    { name: "Anjeer (Dried Figs)", cat: "Dry Fruits", unit: "kg", rate: 1200, desc: "Soft jumbo figs", featured: false, oos: false },
-    { name: "Makhana (Fox Nuts)", cat: "Dry Fruits", unit: "kg", rate: 950, desc: "Crunchy roasted grade", featured: false, oos: false },
-    { name: "Khajoor (Dates)", cat: "Dry Fruits", unit: "kg", rate: 320, desc: "Soft & sweet dates", featured: false, oos: false },
-
-    // Dal & Pulses
-    { name: "Arhar / Toor Dal", cat: "Dal & Pulses", unit: "kg", rate: 165, desc: "Unpolished daily dal", featured: false, oos: false },
-    { name: "Chana Dal", cat: "Dal & Pulses", unit: "kg", rate: 95, desc: "Fresh split chickpeas", featured: false, oos: false },
-    { name: "Moong Dal Dhuli", cat: "Dal & Pulses", unit: "kg", rate: 125, desc: "Easy to digest yellow moong", featured: false, oos: false },
-    { name: "Masoor Dal Lal", cat: "Dal & Pulses", unit: "kg", rate: 105, desc: "Clean red lentils", featured: false, oos: false },
-    { name: "Kabuli Chana (White)", cat: "Dal & Pulses", unit: "kg", rate: 145, desc: "Bold size chole", featured: false, oos: false },
-    { name: "Rajma Chitra", cat: "Dal & Pulses", unit: "kg", rate: 150, desc: "Quick-cooking soft rajma", featured: false, oos: false },
-
-    // Atta & Rice
-    { name: "Chakki Fresh Atta", cat: "Atta & Rice", unit: "kg", rate: 38, desc: "100% whole wheat flour", featured: false, oos: false },
-    { name: "Basmati Rice (1121)", cat: "Atta & Rice", unit: "kg", rate: 120, desc: "Extra-long aromatic grain", featured: false, oos: false },
-    { name: "Golden Sella Rice", cat: "Atta & Rice", unit: "kg", rate: 90, desc: "Ideal for biryani & pulao", featured: false, oos: false },
-    { name: "Besan (Gram Flour)", cat: "Atta & Rice", unit: "kg", rate: 105, desc: "Fine chana dal besan", featured: false, oos: false },
-
-    // Oils, Spices & Daily Kirana
-    { name: "Mustard Oil (Sarson 1L)", cat: "Oils & Kirana", unit: "pkt", rate: 155, desc: "Pure kachi ghani 1L bottle", featured: false, oos: false },
-    { name: "Refined Soyabean Oil (1L)", cat: "Oils & Kirana", unit: "pkt", rate: 135, desc: "1L pouch / bottle", featured: false, oos: false },
-    { name: "Desi Ghee (1L Pack)", cat: "Oils & Kirana", unit: "pkt", rate: 620, desc: "Pure aromatic ghee", featured: false, oos: false },
-    { name: "Cheeni (Sugar)", cat: "Oils & Kirana", unit: "kg", rate: 46, desc: "Clean white crystal sugar", featured: false, oos: false },
-    { name: "Chai Patti (Tea Leaves)", cat: "Oils & Kirana", unit: "kg", rate: 360, desc: "Strong Assam blend", featured: false, oos: false },
-    { name: "Haldi Powder (Turmeric)", cat: "Oils & Kirana", unit: "kg", rate: 260, desc: "Pure ground haldi", featured: false, oos: false },
-    { name: "Jeera (Cumin Seeds)", cat: "Oils & Kirana", unit: "kg", rate: 380, desc: "Aromatic whole jeera", featured: false, oos: false }
-  ];
+  {
+    "name": "M-Natural Premium Raisins (200g)",
+    "cat": "M-Natural Packs",
+    "unit": "pkt",
+    "rate": 115,
+    "desc": "Hygienically packed • Sweet & fresh",
+    "featured": true,
+    "oos": false
+  },
+  {
+    "name": "M-Natural Premium Raisins (250g)",
+    "cat": "M-Natural Packs",
+    "unit": "pkt",
+    "rate": 140,
+    "desc": "Family value pack • Hand-selected",
+    "featured": true,
+    "oos": false
+  },
+  {
+    "name": "M-Natural California Badam (250g)",
+    "cat": "M-Natural Packs",
+    "unit": "pkt",
+    "rate": 205,
+    "desc": "Crunchy whole almonds pack",
+    "featured": true,
+    "oos": false
+  },
+  {
+    "name": "M-Natural Whole Kaju W320 (250g)",
+    "cat": "M-Natural Packs",
+    "unit": "pkt",
+    "rate": 225,
+    "desc": "Premium white whole cashews",
+    "featured": true,
+    "oos": false
+  },
+  {
+    "name": "Kishmish (Green Raisins)",
+    "cat": "Dry Fruits",
+    "unit": "kg",
+    "rate": 540,
+    "desc": "Loose weight • Best quality",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Badam California",
+    "cat": "Dry Fruits",
+    "unit": "kg",
+    "rate": 780,
+    "desc": "Sweet & crunchy",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Badam Gurbandi",
+    "cat": "Dry Fruits",
+    "unit": "kg",
+    "rate": 840,
+    "desc": "Rich natural oil content",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Kaju W320 (Cashew)",
+    "cat": "Dry Fruits",
+    "unit": "kg",
+    "rate": 860,
+    "desc": "Bold whole cashew",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Akhrot Giri (Walnut)",
+    "cat": "Dry Fruits",
+    "unit": "kg",
+    "rate": 1100,
+    "desc": "Snow-white Kashmiri kernels",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Pista Salted",
+    "cat": "Dry Fruits",
+    "unit": "kg",
+    "rate": 980,
+    "desc": "Roasted & lightly salted",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Anjeer (Dried Figs)",
+    "cat": "Dry Fruits",
+    "unit": "kg",
+    "rate": 1200,
+    "desc": "Soft jumbo figs",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Makhana (Fox Nuts)",
+    "cat": "Dry Fruits",
+    "unit": "kg",
+    "rate": 950,
+    "desc": "Crunchy roasted grade",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Khajoor (Dates)",
+    "cat": "Dry Fruits",
+    "unit": "kg",
+    "rate": 320,
+    "desc": "Soft & sweet dates",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Arhar / Toor Dal",
+    "cat": "Dal & Pulses",
+    "unit": "kg",
+    "rate": 165,
+    "desc": "Unpolished daily dal",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Chana Dal",
+    "cat": "Dal & Pulses",
+    "unit": "kg",
+    "rate": 95,
+    "desc": "Fresh split chickpeas",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Moong Dal Dhuli",
+    "cat": "Dal & Pulses",
+    "unit": "kg",
+    "rate": 125,
+    "desc": "Easy to digest yellow moong",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Masoor Dal Lal",
+    "cat": "Dal & Pulses",
+    "unit": "kg",
+    "rate": 105,
+    "desc": "Clean red lentils",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Kabuli Chana (White)",
+    "cat": "Dal & Pulses",
+    "unit": "kg",
+    "rate": 145,
+    "desc": "Bold size chole",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Rajma Chitra",
+    "cat": "Dal & Pulses",
+    "unit": "kg",
+    "rate": 150,
+    "desc": "Quick-cooking soft rajma",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Chakki Fresh Atta",
+    "cat": "Atta & Rice",
+    "unit": "kg",
+    "rate": 38,
+    "desc": "100% whole wheat flour",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Basmati Rice (1121)",
+    "cat": "Atta & Rice",
+    "unit": "kg",
+    "rate": 120,
+    "desc": "Extra-long aromatic grain",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Golden Sella Rice",
+    "cat": "Atta & Rice",
+    "unit": "kg",
+    "rate": 90,
+    "desc": "Ideal for biryani & pulao",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Besan (Gram Flour)",
+    "cat": "Atta & Rice",
+    "unit": "kg",
+    "rate": 105,
+    "desc": "Fine chana dal besan",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Mustard Oil (Sarson 1L)",
+    "cat": "Oils & Kirana",
+    "unit": "pkt",
+    "rate": 155,
+    "desc": "Pure kachi ghani 1L bottle",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Refined Soyabean Oil (1L)",
+    "cat": "Oils & Kirana",
+    "unit": "pkt",
+    "rate": 135,
+    "desc": "1L pouch / bottle",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Desi Ghee (1L Pack)",
+    "cat": "Oils & Kirana",
+    "unit": "pkt",
+    "rate": 620,
+    "desc": "Pure aromatic ghee",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Cheeni (Sugar)",
+    "cat": "Oils & Kirana",
+    "unit": "kg",
+    "rate": 46,
+    "desc": "Clean white crystal sugar",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Chai Patti (Tea Leaves)",
+    "cat": "Oils & Kirana",
+    "unit": "kg",
+    "rate": 360,
+    "desc": "Strong Assam blend",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Haldi Powder (Turmeric)",
+    "cat": "Oils & Kirana",
+    "unit": "kg",
+    "rate": 260,
+    "desc": "Pure ground haldi",
+    "featured": false,
+    "oos": false
+  },
+  {
+    "name": "Jeera (Cumin Seeds)",
+    "cat": "Oils & Kirana",
+    "unit": "kg",
+    "rate": 380,
+    "desc": "Aromatic whole jeera",
+    "featured": false,
+    "oos": false
+  }
+];
 </script>
 
 <script>
@@ -970,5 +1619,6 @@
   renderCats();
   renderCatalog();
 </script>
-</body>
-</html>
+
+
+</body></html>
